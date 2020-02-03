@@ -1,85 +1,85 @@
-$(document).ready(function() {
+// Sets current date and current time
+let m = moment();
 
-    var daysOfTheWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
-    var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    var plannerTimes = [9, 10, 11, 12, 13, 14, 15, 16, 17];
+var currentDayDisplay = m.format("dddd, MMMM, Do YYYY");
 
-    var reminders = [];
+$("#currentDay").text(currentDayDisplay);
 
-    var dayOfWeek = moment().day();
-    var month = moment().month();
-    var day = moment().date();
+let currentHour = m.hours();
 
-    var dayAndDateDiv = $("<div>");
-    dayAndDateDiv.text(daysOfTheWeek[dayOfWeek]+", "+months[month] + " " + day)
+// Empty array to store values entered in textarea input by user
+var agendaItems = [];
 
-    $(".jumbotron").append(dayAndDateDiv);
+// Set hours of each timeblock to a moment object and displays in designated format
+var nine = m.hour(9).format("hA");
+$("#slot-9").text(nine);
+var ten = m.hour(10).format("hA");
+$("#slot-10").text(ten);
+var eleven = m.hour(11).format("hA");
+$("#slot-11").text(eleven);
+var twelve = m.hour(12).format("hA");
+$("#slot-12").text(twelve);
+var one = m.hour(13).format("hA");
+$("#slot-13").text(one);
+var two = m.hour(14).format("hA");
+$("#slot-14").text(two);
+var three = m.hour(15).format("hA");
+$("#slot-15").text(three);
+var four = m.hour(16).format("hA");
+$("#slot-16").text(four);
+var five = m.hour(17).format("hA");
+$("#slot-17").text(five);
 
-    for (i = 0; i < plannerTimes.length; i++){
-        var row = $("<div class='row'>");
-        var timeDiv = $("<div class='col-1'>");
-        var timeH2 = $("<h2>");
-        var textDiv = $("<div class='col-9'>");
-        var textArea = $("<textarea class='textArea'>");
-        var btnDiv = $("<div class='col-2'>");
-        var btn = $("<button class='save-btn'>");
+// Toggle display feature 
 
-        btn.text('Save')
-        timeH2.text(plannerTimes[i]);
+initializeAgenda();
 
-        btnDiv.append(btn);
-        textDiv.append(textArea);
-        timeDiv.append(timeH2);
+function initializeAgenda() {
 
-        btn.attr("data-hour", plannerTimes[i]);
-        textArea.attr("data-hour", plannerTimes[i]);
-        row.attr("data-hour", plannerTimes[i]);
+    $("div .hour").each(function (){
+        var hourChoices = parseInt($(this).attr("id").split("-")[1]);
+            if (hourChoices < currentHour) {
+                $(this).addClass("past");
+                $(this).removeClass("present", "future");
+            } else if (hourChoices === currentHour) {
+                $(this).addClass("present");
+                $(this).removeClass("past", "future");
+            } else {
+                $(this).addClass("future");
+                $(this).removeClass("past", "present");
+            };
+    })
 
-        row.append(timeDiv, textDiv, btnDiv);
-        $(".hours").append(row);
+// Gets items from localStorage on initialization
+    var storedAgendaItems = JSON.parse(localStorage.getItem("agendaItems"));
+
+    if (storedAgendaItems !== "") {
+        agendaItems = storedAgendaItems;
     };
+};
 
-    var time = moment().hour();
+function agendaSet(){
+        event.preventDefault();
     
-    // dynamically create jquery selector based on current hour
-    timeSelectStr = ".row[data-hour="+time.toString()+"]"
-
-    // add class to current time
-    var currentHour = $( timeSelectStr );
-    currentHour.addClass("current-hour");
-
-    // add class to time already past
-    for (x = 0; x < plannerTimes.length; x++){
-        if (plannerTimes[x] < time){
-            timeEarlierSelectStr = ".row[data-hour="+plannerTimes[x].toString()+"]";
-            var earlierHour = $(timeEarlierSelectStr);
-            earlierHour.addClass("earlier");
-        }
-    }
-
-    $(".save-btn").on("click", function() {
-        var text = $(this).parents(".row").find(".textArea").val().trim();
-        var textHour = $(this).parents(".row").data("hour");
-        var timeAndText = {};
-        timeAndText[textHour] = text;
-        // console.log(timeAndText);
-
-        reminders.push(timeAndText);
-        console.log(reminders);
-
-        localStorage.setItem("reminders", JSON.stringify(reminders));
-      });
-
-      var fromLocalStor = localStorage.getItem("reminders");
-      fromLocalStor = JSON.parse(fromLocalStor); //convert string to object
-
-      for (y = 0; y<fromLocalStor.length; y++){
-          for (var key in fromLocalStor[y]) {
-              console.log(fromLocalStor[y][key]);
-              $(".textArea[data-hour="+ key +"]").text(fromLocalStor[y][key]);
-          };
-      };
-
-    //   $(".textArea[data-hour='9']").text('testing'); //This works to set the value of the text area
+        // Code to create an area to write the entered value
+        var textEl = $("<p>");
+        textEl.text(inputAgenda);
+        $(".agenda-text").append(textEl);
     
-});
+        // Code to push input of agenda into array if the input is NOT equal to an empty string
+        if(inputAgenda !== "") {
+            for (var i = 0; i < agendaItems.length; i++) {
+                var inputAgenda = $(".agenda").val();
+        
+                agendaItems.push(inputAgenda);
+            
+                localStorage.setItem("agendaItems", JSON.stringify(agendaItems));
+                $(".agenda-text").text(agendaItems);
+                $(".agenda-text").html(agendaItems[i]);
+            }
+        } else return;
+ };
+
+
+// Save button event listener to push entered text into an array and display the value after storing in local storage
+$("button").on("click", agendaSet());
