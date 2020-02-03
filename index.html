@@ -1,23 +1,162 @@
-<html>
-<head>
-<title>Day Planner</title>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Work Day Scheduler</title>
+  </head>
 
-<!-- Bootstrap -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<link rel="stylesheet" href="assets/style.css">
-
-</head>
-<body>
-    
-<div class="jumbotron text-center">
-    <h2>Day Planner</h2>
-</div>
-
-<div class="container">
-    <div class="hours"></div>
-</div>
-<script src="https://code.jquery.com/jquery.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
-<script src="assets/script.js"></script>
+  <body>
+    <header class="jumbotron">
+      <h1 class="display-3">Work Day Scheduler</h1>
+      <p class="lead">A simple calendar app for scheduling your work day</p>
+      <!-- Use Jquery to append the text in the <p> element to current day using moment.js -->
+      <p id="currentDay" class="lead"></p>
+    </header>
+    <div class="container">
+      <!-- Timeblocks go here -->
+      <!-- Create a div with class = time-block -->
+      <div class="time-block">
+      <!-- Using Bootstrap, create rows with class row for each hour 9 AM to 5 PM-->
+      <!-- Add the following classes to toggle between: past, present, future -->   
+      <!-- Create a save button with class saveBtn and manipulate its use via Jquery  -->
+        <div class="row">
+            <div class="col-2 hour" id="slot-9">
+                <p class="display-time"></p>
+            </div>
+            <div class="col-9 agenda-text">
+                <textarea class="agenda"></textarea>
+            </div>
+            <div class="col-1 saveBtn">
+                <button type="button" class="btn saveIcon"><i class="far fa-save"></i></button>
+            </div>
+        </div>
+      
+      </div>
+    <div class="time-block">
+        <div class="row">
+            <div class="col-2 hour" id="slot-10">
+                <p class="display-time"></p>
+            </div>
+            <div class="col-9 agenda-text">
+                <textarea class="agenda"></textarea>
+            </div>
+                <div class="col-1 saveBtn">
+                    <button type="button" class="btn saveIcon"><i class="far fa-save"></i></button>
+                </div>
+        </div>
+    </div>
+    <div class="time-block">
+        <div class="row">
+            <div class="col-2 hour" id="slot-11">
+                <p class="display-time"></p>
+            </div>
+            <div class="col-9 agenda-text">
+                <textarea class="agenda"></textarea>
+            </div>
+            <div class="col-1 saveBtn">
+                <button type="button" class="btn saveIcon"><i class="far fa-save"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="time-block">
+        <div class="row">
+            <div class="col-2 hour" id="slot-12">
+                <p class="display-time"></p>
+            </div>
+            <div class="col-9 agenda-text">
+                <textarea class="agenda"></textarea>
+            </div>
+            <div class="col-1 saveBtn">
+                <button type="button" class="btn saveIcon"><i class="far fa-save"></i></button>
+            </div>
+        </div>
+    </div> 
+    <div class="time-block">
+        <div class="row">
+            <div class="col-2 hour" id="slot-13">
+                <p class="display-time"></p>
+            </div>
+            <div class="col-9 agenda-text">
+                <textarea class="agenda"></textarea>
+            </div>
+            <div class="col-1 saveBtn">
+                <button type="button" class="btn saveIcon"><i class="far fa-save"></i></button>
+            </div>
+        </div>
+    </div> 
+    <div class="time-block">
+        <div class="row">
+            <div class="col-2 hour" id="slot-14">
+                <p class="display-time"></p>
+            </div>
+        <div class="col-9 agenda-text">
+            <textarea class="agenda"></textarea>
+        </div>
+            <div class="col-1 saveBtn">
+                <button type="button" class="btn saveIcon"><i class="far fa-save"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="time-block">
+        <div class="row"> 
+            <div class="col-2 hour" id="slot-15">
+                <p class="display-time"></p>
+            </div>
+            <div class="col-9 agenda-text">
+                <textarea class="agenda"></textarea>
+            </div>
+            <div class="col-1 saveBtn">
+                <button type="button" class="btn saveIcon"><i class="far fa-save"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="time-block">
+        <div class="row">
+            <div class="col-2 hour" id="slot-16">
+                <p class="display-time"></p>
+            </div>
+            <div class="col-9 agenda-text">
+                <textarea class="agenda"></textarea>
+            </div>
+            <div class="col-1 saveBtn">
+                <button type="button" class="btn saveIcon"><i class="far fa-save"></i></button>
+            </div>
+        </div>
+    </div> 
+    <div class="time-block">
+        <div class="row">
+            <div class="col-2 hour" id="slot-17">
+                <p class="display-time"></p>
+            </div>
+            <div class="col-9 agenda-text">
+                <textarea class="agenda"></textarea>
+            </div>
+            <div class="col-1 saveBtn">
+                <button type="button" class="btn saveIcon"><i class="far fa-save"></i></button>
+            </div>
+        </div>
+    </div>
+      
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

@@ -1,9 +1,9 @@
 .jumbotron{
-    background-color: pink;
+    background-color: red;
 }
 
 .row{
-    background-color: pink;
+    background-color: red;
     padding: 5px;
     border-style: solid;
     border-width: .25px;
@@ -22,7 +22,7 @@
 }
 
 .current-hour{
-    background-color: hotpink;
+    background-color: lightcoral;
 }
 
 .earlier{
